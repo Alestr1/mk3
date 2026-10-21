@@ -1,8 +1,8 @@
 ../Core/Src/tetris.c:17:12:check_collision	16	static
-../Core/Src/tetris.c:40:6:Tetris_Spawn	8	static
-../Core/Src/tetris.c:31:6:Tetris_Init	8	static
-../Core/Src/tetris.c:48:6:Tetris_Drop	8	static
-../Core/Src/tetris.c:52:6:Tetris_Move	16	static
-../Core/Src/tetris.c:58:6:Tetris_Rotate	24	static
-../Core/Src/tetris.c:70:5:Tetris_Step	8	static
-../Core/Src/tetris.c:98:6:Tetris_Render	48	static
+../Core/Src/tetris.c:44:6:Tetris_Spawn	8	static
+../Core/Src/tetris.c:35:6:Tetris_Init	8	static
+../Core/Src/tetris.c:54:6:Tetris_Drop	8	static
+../Core/Src/tetris.c:60:6:Tetris_Move	16	static
+../Core/Src/tetris.c:67:6:Tetris_Rotate	24	static
+../Core/Src/tetris.c:80:5:Tetris_Step	16	static
+../Core/Src/tetris.c:127:6:Tetris_Render	48	static

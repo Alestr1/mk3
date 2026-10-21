@@ -279,21 +279,32 @@ void StartTaskInput(void const * arg) {
 void StartTaskGame(void const * arg) {
     TetrisState state;
     Tetris_Init(&state);
+    Tetris_Render(&state);
 
     for(;;) {
-        osEvent ev = osMessageGet(xInputQueueHandle, state.speed);
+        uint32_t timeout = (state.speed < 50) ? 50 : state.speed;
+
+        osEvent ev = osMessageGet(xInputQueueHandle, timeout);
 
         if (ev.status == osEventMessage) {
             switch(ev.value.v) {
-                case 0x01: Tetris_Move(&state, -1, 0); break; // Row 0, Col 1 (Left)
-                case 0x02: Tetris_Rotate(&state); break;      // Row 0, Col 2 (Rotate)
-                case 0x04: Tetris_Move(&state, 1, 0); break;  // Row 0, Col 3 (Right)
-                case 0x11: Tetris_Move(&state, 0, 1); break;  // Row 1, Col 1 (Down)
-                case 0x12: Tetris_Drop(&state); Tetris_Step(&state); break;
+                case 0x01: Tetris_Move(&state, -1, 0); break; // Left
+                case 0x02: Tetris_Rotate(&state); break;      // Rotate
+                case 0x04: Tetris_Move(&state, 1, 0); break;  // Right
+                case 0x11: Tetris_Move(&state, 0, 1); break;  // Soft Drop
+                case 0x12:
+                    Tetris_Drop(&state);
+                    if(Tetris_Step(&state)) {
+                        Tetris_Init(&state);
+                        Tetris_Render(&state);
+                    }
+                    break;
+                default: break;
             }
         } else {
             if (Tetris_Step(&state)) {
                 Tetris_Init(&state);
+                Tetris_Render(&state);
             }
         }
         Tetris_Render(&state);
